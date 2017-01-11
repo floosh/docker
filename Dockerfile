@@ -13,6 +13,10 @@ COPY etc /etc/
 COPY run.sh /run.sh
 RUN chmod u+rwx /run.sh
 
+# File upload size
+RUN sed -i -e "s/^upload_max_filesize\s*=\s*2M/upload_max_filesize = 256M/" /etc/php5/php.ini
+RUN sed -i -e "s/^post_max_size\s*=\s*8M/post_max_size = 256M/" /etc/php5/php.ini
+
 # Calculate download URL
 ENV VERSION 4.6.5.2
 ENV URL https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.gz
